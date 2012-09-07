@@ -41,6 +41,18 @@ def collatz_eval (i, j) :
     assert j > 0
     # <your code>
     v = 1
+    for num in range(i, j+1):
+	collatz_cycle = 1
+	collatz_num = num
+	while (collatz_num != 1):
+	    if(collatz_num%2 == 0):
+		collatz_num = collatz_num/2
+	    else:
+		collatz_num = collatz_num*3 + 1
+	    collatz_cycle = collatz_cycle + 1
+	if(collatz_cycle > v):
+	    v = collatz_cycle
+    
     assert v > 0
     return v
 
