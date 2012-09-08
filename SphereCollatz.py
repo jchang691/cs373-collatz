@@ -9,7 +9,8 @@
 # -------
 
 import sys
-cycle_table = [0] * 1000001
+cache_size = 650000
+cycle_table = [0] * cache_size
 # ------------
 # collatz_read
 # ------------
@@ -43,11 +44,10 @@ def collatz_eval (i, j) :
     """
     assert i > 0
     assert j > 0
-    # <your code>
+    
     v = 1
     beg = i
     end = j
-    
     if(i > j):
 	beg = j
 	end = i
@@ -55,7 +55,7 @@ def collatz_eval (i, j) :
     for num in range(beg, end+1):
 	
 	cycle = collatz_cycle(num)
-	if cycle_table[num] == 0:
+	if(num < cache_size and cycle_table[num] == 0):
 	    cycle_table[num] = cycle
 	if(cycle > v):
 	    v = cycle
@@ -67,7 +67,7 @@ def collatz_eval (i, j) :
 def collatz_cycle(n):
      cycles = 1
      while(n > 1):
-	if n <= 1000000 and cycle_table[n] != 0:
+	if n < cache_size and cycle_table[n] != 0:
 	    cycles = cycles + cycle_table[n] - 1
 	    break
 	if n % 2 == 0:
