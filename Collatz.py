@@ -6,6 +6,8 @@
 # Glenn P. Downing
 # ---------------------------
 
+cycle_table = [0] * 1000001
+
 # ------------
 # collatz_read
 # ------------
@@ -48,22 +50,30 @@ def collatz_eval (i, j) :
 	end = i
 
     for num in range(beg, end+1):
-	collatz_cycle = 1
-	collatz_num = num
-	while (collatz_num > 1):
-	    if(collatz_num%2 == 0):
-		collatz_num = collatz_num/2
-	    else:
-		collatz_num = (collatz_num*3 + 1)/2
-		collatz_cycle = collatz_cycle+1
-	    collatz_cycle = collatz_cycle + 1
-	if(collatz_cycle > v):
-	    v = collatz_cycle
-    
+	
+	cycle = collatz_cycle(num)
+	if cycle_table[num] == 0:
+	    cycle_table[num] = cycle
+	if(cycle > v):
+	    v = cycle
+
     
     assert v > 0
     return v
 
+def collatz_cycle(n):
+     cycles = 1
+     while(n > 1):
+	if n <= 1000000 and cycle_table[n] != 0:
+	    cycles = cycles + cycle_table[n] - 1
+	    break
+	if n % 2 == 0:
+	    n = n / 2
+	    cycles+= 1
+	else:
+	    n = n + (n >> 1) + 1
+	    cycles+=2
+     return cycles
 # -------------
 # collatz_print
 # -------------
