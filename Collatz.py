@@ -6,6 +6,7 @@
 # Glenn P. Downing
 # ---------------------------
 import time
+#Builds the cache of size cache_size
 cache_size = 650000
 cycle_table = [0] * cache_size
 
@@ -44,6 +45,7 @@ def collatz_eval (i, j) :
     assert j > 0
     
     v = 1
+    # Allows the format i, j and j, i (ex: 1 10 and 10 1)
     beg = i
     end = j
     if(i > j):
