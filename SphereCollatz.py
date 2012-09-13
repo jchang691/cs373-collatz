@@ -65,8 +65,13 @@ def collatz_eval (i, j) :
     return v
 
 def collatz_cycle(n):
-     cycles = 1
-     while(n > 1):
+    """
+    n is the number that the user wants the collatz to run
+    returns cycle length
+    """
+    cycles = 1
+    assert n > 0
+    while(n > 1):
 	if n < cache_size and cycle_table[n] != 0:
 	    cycles = cycles + cycle_table[n] - 1
 	    break
@@ -76,7 +81,8 @@ def collatz_cycle(n):
 	else:
 	    n = n + (n >> 1) + 1
 	    cycles+=2
-     return cycles
+    assert cycles > 0
+    return cycles
  
 
 # -------------
